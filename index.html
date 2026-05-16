@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حمالات الصدر السحرية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --red: #E8192C;
+    --red-light: #fff0f2;
+    --red-dark: #c0001a;
+    --pink-bg: #fdf4f5;
+    --dark: #1a1a2e;
+    --gray: #666;
+    --green: #1db954;
+    --orange: #ff6b00;
+    --gold: #f5a623;
+  }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: #fff;
+    color: var(--dark);
+    max-width: 480px;
+    margin: 0 auto;
+    overflow-x: hidden;
+  }
+
+  /* ===== ANNOUNCEMENT BAR ===== */
+  .announcement {
+    background: var(--red);
+    color: #fff;
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .announcement span {
+    display: block;
+    font-size: 11px;
+    opacity: 0.9;
+    margin-top: 2px;
+  }
+
+  /* ===== HERO SLIDER ===== */
+  .hero-slider {
+    position: relative;
+    background: var(--pink-bg);
+    overflow: hidden;
+  }
+
+  .slide {
+    display: none;
+    position: relative;
+    animation: none;
+  }
+  .slide.active { 
+    display: block;
+    animation: slideIn 0.35s ease;
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .slide-img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    background: linear-gradient(135deg, #f8d7da, #ffe4e8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+  }
+
+  .slide-badge {
+    position: absolute;
+    top: 20px;
+    left: 16px;
+    background: var(--red);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-size: 20px;
+    font-weight: 900;
+    box-shadow: 0 4px 15px rgba(232,25,44,0.4);
+  }
+
+  .slide-labels {
+    position: absolute;
+    bottom: 16px;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    padding: 0 16px;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+  }
+
+  .label-before, .label-after {
+    background: rgba(0,0,0,0.75);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 0 8px;
+  }
+
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #ddd;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .dot.active { background: var(--red); }
+
+  /* ===== PRODUCT INTRO ===== */
+  .intro {
+    text-align: center;
+    padding: 24px 20px 16px;
+    background: var(--pink-bg);
+  }
+
+  .intro-badge {
+    display: inline-block;
+    background: var(--red-light);
+    color: var(--red);
+    border: 1px solid #f8c0c5;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+
+  .intro h1 {
+    font-size: 26px;
+    font-weight: 900;
+    line-height: 1.4;
+    color: var(--dark);
+    margin-bottom: 12px;
+  }
+
+  .intro h1 span { color: var(--red); }
+
+  .intro p {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .price-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  .price-new {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--red);
+  }
+
+  .price-old {
+    font-size: 18px;
+    color: #aaa;
+    text-decoration: line-through;
+  }
+
+  .discount-badge {
+    background: var(--green);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .cta-btn {
+    display: block;
+    width: 100%;
+    background: var(--red);
+    color: #fff;
+    border: none;
+    padding: 18px;
+    border-radius: 14px;
+    font-size: 18px;
+    font-weight: 900;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 20px rgba(232,25,44,0.35);
+    margin-bottom: 12px;
+  }
+
+  .cta-btn:hover { transform: scale(1.02); box-shadow: 0 6px 25px rgba(232,25,44,0.45); }
+
+  .secret-box {
+    background: #fff;
+    border: 1.5px solid #eee;
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--gray);
+    font-weight: 600;
+  }
+
+  /* ===== FEATURES ===== */
+  .section { padding: 28px 16px; }
+  .section-title {
+    font-size: 22px;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--dark);
+  }
+
+  .feature-card {
+    background: var(--red-light);
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+
+  .feature-icon {
+    width: 60px; height: 60px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+    font-size: 24px;
+    color: var(--red);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  }
+
+  .feature-card h3 {
+    font-size: 17px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: var(--dark);
+  }
+
+  .feature-card p {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.7;
+  }
+
+  /* ===== RED SECTION ===== */
+  .red-section {
+    background: var(--red);
+    padding: 32px 16px 24px;
+    color: #fff;
+  }
+
+  .red-section .section-title { color: #fff; }
+
+  .use-card {
+    background: rgba(255,255,255,0.15);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 12px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+  }
+
+  .use-card .icon { font-size: 28px; margin-bottom: 10px; }
+  .use-card h3 { font-size: 16px; font-weight: 800; margin-bottom: 6px; }
+  .use-card p { font-size: 12px; opacity: 0.88; line-height: 1.6; }
+
+  /* ===== COMPARISON ===== */
+  .comparison { padding: 28px 16px; background: #fff; }
+
+  .comp-card {
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 14px;
+  }
+
+  .comp-card.bad {
+    border: 1.5px solid #eee;
+    background: #fafafa;
+  }
+
+  .comp-card.good {
+    border: 1.5px solid #ffc9ce;
+    background: var(--red-light);
+  }
+
+  .comp-title {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+
+  .comp-title.bad-title { color: var(--dark); }
+  .comp-title.good-title { color: var(--red); }
+
+  .comp-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    justify-content: flex-end;
+    color: var(--dark);
+  }
+
+  /* ===== COUNTDOWN ===== */
+  .countdown-section {
+    background: var(--red-light);
+    border-radius: 16px;
+    padding: 20px;
+    margin: 0 16px 20px;
+    text-align: center;
+    border: 1.5px solid #ffc9ce;
+  }
+
+  .countdown-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--red);
+    margin-bottom: 14px;
+  }
+
+  .timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    direction: ltr;
+  }
+
+  .timer-box {
+    background: #fff;
+    border-radius: 10px;
+    padding: 12px 16px;
+    min-width: 65px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    flex: 1;
+    max-width: 90px;
+  }
+
+  .timer-box .num {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--dark);
+    display: block;
+    line-height: 1;
+  }
+
+  .timer-box .label {
+    font-size: 11px;
+    color: var(--gray);
+    display: block;
+    margin-top: 4px;
+  }
+
+  .timer-sep {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--red);
+    margin-top: -8px;
+  }
+
+  /* ===== ORDER SECTION ===== */
+  .order-section {
+    padding: 28px 16px;
+    background: #fff;
+  }
+
+  .order-title {
+    font-size: 20px;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--dark);
+  }
+
+  /* Package selector */
+  .package {
+    border: 2px solid #eee;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+  }
+
+  .package.selected {
+    border-color: var(--red);
+    background: var(--red-light);
+  }
+
+  .package-badge {
+    position: absolute;
+    top: -12px;
+    right: 50%;
+    transform: translateX(50%);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .badge-hot { background: var(--orange); color: #fff; }
+  .badge-save { background: var(--green); color: #fff; }
+
+  .package-info { text-align: right; }
+  .package-info h4 { font-size: 16px; font-weight: 800; color: var(--dark); }
+  .package-info p { font-size: 12px; color: var(--gray); margin-top: 2px; }
+
+  .package-price {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--red);
+  }
+
+  .radio-circle {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-right: 8px;
+  }
+
+  .package.selected .radio-circle {
+    border-color: var(--red);
+    background: var(--red);
+  }
+
+  .radio-inner {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    display: none;
+  }
+
+  .package.selected .radio-inner { display: block; }
+
+  /* Form */
+  .form-group { margin-bottom: 20px; }
+
+  .form-label {
+    display: block;
+    text-align: right;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--dark);
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 12px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    color: var(--dark);
+    background: #fff;
+    outline: none;
+    text-align: right;
+    transition: border-color 0.2s;
+  }
+
+  .form-input:focus { border-color: var(--red); }
+  .form-input::placeholder { color: #bbb; }
+
+  .phone-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .flag-select {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 12px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    background: #fff;
+    cursor: pointer;
+  }
+
+  .wilaya-select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 12px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    background: #fff;
+    text-align: right;
+    outline: none;
+    color: var(--dark);
+  }
+
+  /* Promo */
+  .promo-box {
+    background: var(--red-light);
+    border: 1.5px solid #ffc9ce;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+  }
+
+  .promo-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--red);
+    margin-bottom: 10px;
+    justify-content: flex-end;
+  }
+
+  /* Privacy notice */
+  .privacy-box {
+    border: 1.5px solid #eee;
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: var(--gray);
+    font-weight: 600;
+  }
+
+  /* Surprise box */
+  .surprise-box {
+    background: var(--red-light);
+    border: 1.5px solid #ffc9ce;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .surprise-box h3 {
+    font-size: 17px;
+    font-weight: 900;
+    margin-bottom: 10px;
+    color: var(--dark);
+  }
+
+  .surprise-box p {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.7;
+  }
+
+  /* Guarantee */
+  .guarantee-box {
+    border: 1.5px solid #d4edda;
+    background: #f0fff4;
+    border-radius: 14px;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+
+  .guarantee-text h4 {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 4px;
+    text-align: right;
+  }
+
+  .guarantee-text p {
+    font-size: 12px;
+    color: var(--gray);
+    line-height: 1.6;
+    text-align: right;
+  }
+
+  .guarantee-icon {
+    width: 50px; height: 50px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    margin-left: 12px;
+  }
+
+  /* ===== REVIEWS ===== */
+  .reviews { padding: 28px 16px; background: #fff; }
+
+  .review-card {
+    background: var(--red-light);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 14px;
+  }
+
+  .stars { font-size: 20px; text-align: left; margin-bottom: 10px; }
+
+  .review-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--dark);
+    text-align: right;
+    margin-bottom: 10px;
+  }
+
+  .reviewer {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--red);
+    text-align: left;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--dark);
+    color: #aaa;
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+  }
+
+  /* ===== STICKY CTA ===== */
+  .sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0; right: 0;
+    max-width: 480px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 12px 16px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.12);
+    z-index: 100;
+    display: none;
+  }
+
+  .sticky-cta.visible { display: block; }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+  }
+  .pulse { animation: pulse 2s infinite; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in { animation: fadeIn 0.5s ease forwards; }
+
+  /* ===== COUNTDOWN INSIDE FORM ===== */
+  .countdown-form-box {
+    background: linear-gradient(135deg, #fff0f2, #ffe4e8);
+    border: 2px solid #ffc9ce;
+    border-radius: 16px;
+    padding: 18px 16px;
+    margin: 12px 0 20px;
+    text-align: center;
+    display: block !important;
+  }
+  .countdown-form-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--red);
+    margin-bottom: 14px;
+    animation: textFlash 1.5s ease-in-out infinite;
+  }
+  @keyframes textFlash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  /* ===== BUTTON BLINK ===== */
+  @keyframes btnGlow {
+    0%, 100% { box-shadow: 0 4px 20px rgba(232,25,44,0.35); transform: scale(1); }
+    50% { box-shadow: 0 6px 35px rgba(232,25,44,0.7); transform: scale(1.025); }
+  }
+  .cta-blink { animation: btnGlow 1.8s ease-in-out infinite !important; }
+
+  @keyframes blinkText {
+    0%, 100% { opacity: 1; }
+    40% { opacity: 0; }
+    60% { opacity: 0; }
+  }
+  .btn-text-blink { animation: blinkText 1.8s ease-in-out infinite; font-weight: 900; }
+
+  /* ===== OFFER BADGE ANIMATIONS ===== */
+  @keyframes badgeFlash {
+    0%, 100% { background: var(--orange); transform: scale(1); box-shadow: 0 2px 8px rgba(255,107,0,0.4); }
+    50% { background: #ff8c00; transform: scale(1.06); box-shadow: 0 4px 18px rgba(255,107,0,0.7); }
+  }
+  .badge-flash { animation: badgeFlash 1.4s ease-in-out infinite !important; }
+
+  @keyframes badgeShine {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  .badge-shine {
+    background: linear-gradient(90deg, #1db954 30%, #4ade80 50%, #1db954 70%) !important;
+    background-size: 200% auto !important;
+    animation: badgeShine 2s linear infinite !important;
+    transform-origin: center;
+  }
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announcement">
+  🚚 توصيل مجاني إلى كل الولايات | الدفع عند الاستلام 🤝
+  <span>😶 سبيسيال مخبية داخل الكولي تاعك! استلمي طلبيتك واكتشفي هديتك</span>
+</div>
+
+<!-- HERO SLIDER -->
+<div class="hero-slider">
+  <div class="slide active">
+    <div style="position:relative;">
+      <img src="slide1.jpg" style="width:100%; height:360px; object-fit:cover; object-position:center top; display:block;">
+      <div class="slide-badge">🔥 فقط 2600 دج</div>
+      <div class="slide-labels">
+        <div class="label-before">❌ قبل</div>
+        <div class="label-after">✅ بعد</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide">
+    <div style="position:relative; background:#f9f9f9; display:flex; align-items:center; justify-content:center; height:360px;">
+      <img src="slide2.jpg" style="height:340px; object-fit:contain; display:block; padding: 20px;">
+      <div class="slide-badge" style="top:16px; left:16px;">✨ لون بيج طبيعي</div>
+    </div>
+  </div>
+  <div class="slide">
+    <div style="position:relative; background:#f9f9f9; display:flex; align-items:center; justify-content:center; height:360px;">
+      <img src="slide3.jpg" style="height:300px; object-fit:contain; display:block;">
+      <div class="slide-badge" style="top:16px; left:16px;">🖤 لون أسود</div>
+    </div>
+  </div>
+  <div class="slider-dots">
+    <div class="dot active" onclick="goSlide(0)"></div>
+    <div class="dot" onclick="goSlide(1)"></div>
+    <div class="dot" onclick="goSlide(2)"></div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="intro">
+  <div class="intro-badge">✨ السر في راحتك كل يوم</div>
+  <h1>تهني من السوتيان العادي..<br><span>سيليكون سحري ومريح!</span></h1>
+  <p>حمالات صدر سيليكون ذاتية اللصق، متبانش تحت القش، ثابتة متطيحش، وتعطيك راحة تامة طول النهار.</p>
+  <div class="price-row">
+    <span class="discount-badge">تخفيض</span>
+    <span class="price-new">2600 دج</span>
+    <span class="price-old">4500 دج</span>
+  </div>
+  <a href="#order" class="cta-btn pulse">🛒 أطلبي الآن والدفع عند الاستلام</a>
+  <div class="secret-box">
+    📦 سرية تامة 100%: توصلك مغلفة وما يعرف واش شريتي 🤫
+  </div>
+</div>
+
+
+
+<!-- WHY SECTION -->
+<div class="section">
+  <div class="section-title">😍 علاه لازم تكون عندك؟</div>
+
+  <div class="feature-card">
+    <div class="feature-icon">💧</div>
+    <h3>ضد العرق والماء</h3>
+    <p>لصقة قوية متطيحش ميم إذا عرقتي، تقدري تلبسيها في الصيف بكل ثقة.</p>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-icon" style="color:#666;">🚫</div>
+    <h3>متبانش كامل</h3>
+    <p>تصميم رقيق وحواف ناعمة تخليها تبان كأنها جزء من الجسم، مثالية للفساتين.</p>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-icon">❤️</div>
+    <h3>مريحة جداً</h3>
+    <p>بدون خيوط مزعجة أو حديد، تعطيك رفع طبيعي وراحة طول اليوم.</p>
+  </div>
+
+  <div class="feature-card" style="background: var(--red); color: #fff;">
+    <div class="feature-icon" style="background: rgba(255,255,255,0.2); color: #fff;">✨</div>
+    <h3 style="color:#fff;">رفع وتنسيق الصدر</h3>
+    <p style="color:rgba(255,255,255,0.85);">تعطيك شكل جذاب ومرفوع يزيد من ثقتك بنفسك في أي لبسة.</p>
+  </div>
+</div>
+
+<!-- RED SECTION - USE CASES -->
+<div class="red-section">
+  <div class="section-title">السر وراء أناقتك في كل<br>مناسبة 💃</div>
+
+  <div class="use-card">
+    <div class="icon">🎉</div>
+    <h3>فساتين السهرة والأعراس</h3>
+    <p>البسي واش تحبي، حتى الفساتين المفتوحة من الظهر بدون إحراج.</p>
+  </div>
+
+  <div class="use-card">
+    <div class="icon">☀️</div>
+    <h3>الخرجات اليومية</h3>
+    <p>راحة تامة طول النهار، متبانش تحت التيشرت أو القميص الصيفي.</p>
+  </div>
+
+  <div class="use-card">
+    <div class="icon">🏖️</div>
+    <h3>الشاطئ والسباحة</h3>
+    <p>مقاومة للماء 100%، تبقى ثابتة حتى في الماء والرياح.</p>
+  </div>
+</div>
+
+<!-- COMPARISON -->
+<div class="comparison section">
+  <div class="section-title">علاه السيليكون السحري خير من<br>السوتيان العادي؟ 🤔</div>
+
+  <div class="comp-card bad">
+    <div class="comp-title bad-title">❌ السوتيان التقليدي</div>
+    <div class="comp-item">❌ يبان تحت القش ويخسر المنظر</div>
+    <div class="comp-item">❌ الحديد والخيوط يوجعو ويخلو أثر</div>
+    <div class="comp-item">❌ يزلق ويطيح مع الحركة</div>
+    <div class="comp-item">❌ ميتلبسش مع فساتين الظهر العريان</div>
+  </div>
+
+  <div class="comp-card good">
+    <div class="comp-title good-title">✅ السيليكون السحري</div>
+    <div class="comp-item">✅ متبانش كامل، كأنها بشرة ثانية</div>
+    <div class="comp-item">✅ راحة تامة بدون حديد ولا خيوط</div>
+    <div class="comp-item">✅ لصقة قوية تثبت حتى مع العرق</div>
+    <div class="comp-item">✅ ترفد الصدر وتعطيه شكل جذاب</div>
+  </div>
+</div>
+
+<!-- ORDER SECTION -->
+<div class="order-section" id="order">
+  <div class="order-title">عمري الاستمارة باش نبعثولك الطلبية 📦</div>
+
+  <!-- COUNTDOWN INSIDE FORM -->
+  <div class="countdown-form-box">
+    <div class="countdown-form-title">⚡ أسرعي! العرض ينتهي خلال:</div>
+    <div class="timer">
+      <div class="timer-box">
+        <span class="num" id="hours">02</span>
+        <span class="label">ساعة</span>
+      </div>
+      <div class="timer-sep">:</div>
+      <div class="timer-box">
+        <span class="num" id="minutes">43</span>
+        <span class="label">دقيقة</span>
+      </div>
+      <div class="timer-sep">:</div>
+      <div class="timer-box">
+        <span class="num" id="seconds">33</span>
+        <span class="label">ثانية</span>
+      </div>
+    </div>
+  </div>
+
+  <p style="text-align:center; color:var(--gray); font-size:13px; margin-bottom:24px;">الدفع يكون كي توصلك السلعة ليدك</p>
+
+  <!-- PACKAGE SELECTOR -->
+  <div style="margin-bottom:24px;">
+    <div style="font-size:16px; font-weight:800; text-align:right; margin-bottom:14px; color:var(--dark);">خيري العرض لي يوالمك:</div>
+
+    <div class="package" onclick="selectPackage(this, 1)">
+      <div class="package-price">2600 دج</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div class="package-info">
+          <h4>حبة واحدة</h4>
+          <p>للتجربة</p>
+        </div>
+        <div class="radio-circle"><div class="radio-inner"></div></div>
+      </div>
+    </div>
+
+    <div class="package selected" onclick="selectPackage(this, 2)" style="margin-top:20px;">
+      <div class="package-badge badge-hot badge-flash">🔥 الأكثر مبيعاً (توفير 700 دج)</div>
+      <div class="package-price">4500 دج</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div class="package-info">
+          <h4>زوج حبات</h4>
+          <p>لك ولصحبتك</p>
+        </div>
+        <div class="radio-circle"><div class="radio-inner"></div></div>
+      </div>
+    </div>
+
+    <div class="package" onclick="selectPackage(this, 3)" style="margin-top:20px;">
+      <div class="package-badge badge-save badge-shine">💰 أفضل توفير (توفير 1800 دج)</div>
+      <div class="package-price">6000 دج</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div class="package-info">
+          <h4>3 حبات</h4>
+          <p>باش ميزيدش يخصك</p>
+        </div>
+        <div class="radio-circle"><div class="radio-inner"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-group">
+    <label class="form-label">رقم الهاتف *</label>
+    <div class="phone-row">
+      <input type="tel" class="form-input" placeholder="0551 23 45 67" style="flex:1;">
+      <div class="flag-select">🇩🇿 ▼</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">الاسم واللقب *</label>
+    <input type="text" class="form-input" placeholder="اكتبي اسمك هنا">
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">الولاية *</label>
+    <select class="wilaya-select" id="wilayaSelect" onchange="updateCommunes()">
+      <option value="">اختاري ولايتك</option>
+      <option value="1">01 - أدرار</option><option value="2">02 - الشلف</option>
+      <option value="3">03 - الأغواط</option><option value="4">04 - أم البواقي</option>
+      <option value="5">05 - باتنة</option><option value="6">06 - بجاية</option>
+      <option value="7">07 - بسكرة</option><option value="8">08 - بشار</option>
+      <option value="9">09 - البليدة</option><option value="10">10 - البويرة</option>
+      <option value="11">11 - تمنراست</option><option value="12">12 - تبسة</option>
+      <option value="13">13 - تلمسان</option><option value="14">14 - تيارت</option>
+      <option value="15">15 - تيزي وزو</option><option value="16">16 - الجزائر العاصمة</option>
+      <option value="17">17 - الجلفة</option><option value="18">18 - جيجل</option>
+      <option value="19">19 - سطيف</option><option value="20">20 - سعيدة</option>
+      <option value="21">21 - سكيكدة</option><option value="22">22 - سيدي بلعباس</option>
+      <option value="23">23 - عنابة</option><option value="24">24 - قالمة</option>
+      <option value="25">25 - قسنطينة</option><option value="26">26 - المدية</option>
+      <option value="27">27 - مستغانم</option><option value="28">28 - المسيلة</option>
+      <option value="29">29 - معسكر</option><option value="30">30 - ورقلة</option>
+      <option value="31">31 - وهران</option><option value="32">32 - البيض</option>
+      <option value="33">33 - إليزي</option><option value="34">34 - برج بوعريريج</option>
+      <option value="35">35 - بومرداس</option><option value="36">36 - الطارف</option>
+      <option value="37">37 - تندوف</option><option value="38">38 - تيسمسيلت</option>
+      <option value="39">39 - الوادي</option><option value="40">40 - خنشلة</option>
+      <option value="41">41 - سوق أهراس</option><option value="42">42 - تيبازة</option>
+      <option value="43">43 - ميلة</option><option value="44">44 - عين الدفلى</option>
+      <option value="45">45 - النعامة</option><option value="46">46 - عين تموشنت</option>
+      <option value="47">47 - غرداية</option><option value="48">48 - غليزان</option>
+      <option value="49">49 - تيميمون</option><option value="50">50 - برج باجي مختار</option>
+      <option value="51">51 - أولاد جلال</option><option value="52">52 - بني عباس</option>
+      <option value="53">53 - عين صالح</option><option value="54">54 - عين قزام</option>
+      <option value="55">55 - توقرت</option><option value="56">56 - جانت</option>
+      <option value="57">57 - المغير</option><option value="58">58 - المنيعة</option>
+    </select>
+  </div>
+
+  <div class="form-group" id="communeGroup" style="display:none;">
+    <label class="form-label">البلدية *</label>
+    <select class="wilaya-select" id="communeSelect">
+      <option value="">اختاري بلديتك</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">العنوان الكامل * <span style="font-size:12px; color:var(--gray); font-weight:500;">(حي، عمارة، رقم...)</span></label>
+    <textarea class="form-input" id="addressField" placeholder="مثال: حي النصر، عمارة 5 شقة 3، بجانب مسجد..." style="height:90px; resize:none; padding-top:12px; line-height:1.6;"></textarea>
+  </div>
+
+  <!-- PROMO CODE -->
+  <div class="promo-box">
+    <div class="promo-label">🏷️ عندك كود برومو؟ (اختياري)</div>
+    <input type="text" class="form-input" placeholder="أدخلي الكود هنا" style="background:#fff;">
+  </div>
+
+  <!-- PRIVACY -->
+  <div class="privacy-box">
+    <span>سرية تامة: التغليف يكون مغلق ومجهول، المندوب وما يعرفش واش كاين لداخل!</span>
+    🔒
+  </div>
+
+  <!-- SURPRISE BOX -->
+  <div class="surprise-box">
+    <h3>🎁 مفاجأة مميزة تستنى فيك داخل العلبة!</h3>
+    <p>لأنك زبونة مميزة، حطينا هدية سرية وقيمة لداخل الطلبية تاعك.<br>
+    غير يوصلك المندوب، استلمي الكولي وافتحي العلبة باش تكتشفي المفاجأة لي وجدناها ليك! ✨🤫 مطراطيش هاد الفرحة 😘</p>
+  </div>
+
+  <!-- SUBMIT -->
+  <button class="cta-btn cta-blink" style="font-size:20px;" onclick="submitOrder()">
+    🛍️ <span class="btn-text-blink">اطلبي الآن</span> — الدفع عند الاستلام
+  </button>
+
+  <!-- GUARANTEE -->
+  <div class="guarantee-box">
+    <div class="guarantee-text">
+      <h4>ضمان الرضا 100%</h4>
+      <p>ما تخلصيش والو حتى تلحقك السلعة وتأكدي من الجودة تاعها بنفسك!</p>
+    </div>
+    <div class="guarantee-icon">✅</div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<div class="reviews">
+  <div class="section-title">واش قالو زبوناتنا لي جربوها؟ 💬</div>
+
+  <div class="review-card">
+    <div class="stars">⭐⭐⭐⭐⭐</div>
+    <p class="review-text">"روعة! لبستها في عرس أختي مع روبة ظهرها عريان، لصقت مليح ومطاحتليش كامل ميم مع الشطيح والعرق"</p>
+    <div class="reviewer">- سارة، الجزائر العاصمة</div>
+  </div>
+
+  <div class="review-card">
+    <div class="stars">⭐⭐⭐⭐⭐</div>
+    <p class="review-text">"مريحة بزاف، نسيت كامل بلي راني لابسة سوتيان. ننصح بيها أي وحدة تحوس على الراحة"</p>
+    <div class="reviewer">- مريم، وهران</div>
+  </div>
+
+  <div class="review-card">
+    <div class="stars">⭐⭐⭐⭐⭐</div>
+    <p class="review-text">"النتيجة صدمتني! ترفد الصدر وتبينو واقف، وزيد التوصيل كان سريع والتعامل بزاف هايل"</p>
+    <div class="reviewer">- أمينة، قسنطينة</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 جميع الحقوق محفوظة. حمالات الصدر السحرية.
+</footer>
+
+<!-- STICKY CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <a href="#order" class="cta-btn" style="margin:0; font-size:16px;">🛒 اطلبي الآن - الدفع عند الاستلام</a>
+</div>
+
+<script>
+  // Countdown timer
+  let totalSeconds = 2 * 3600 + 43 * 60 + 33;
+
+  function updateTimer() {
+    const h = Math.floor(totalSeconds / 3600);
+    const m = Math.floor((totalSeconds % 3600) / 60);
+    const s = totalSeconds % 60;
+    document.getElementById('hours').textContent = String(h).padStart(2, '0');
+    document.getElementById('minutes').textContent = String(m).padStart(2, '0');
+    document.getElementById('seconds').textContent = String(s).padStart(2, '0');
+    if (totalSeconds > 0) totalSeconds--;
+  }
+  setInterval(updateTimer, 1000);
+  updateTimer();
+
+  // Slider with swipe & drag
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  const sliderEl = document.querySelector('.hero-slider');
+
+  function goSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = (n + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
+
+  let autoSlide = setInterval(() => goSlide(currentSlide + 1), 3500);
+
+  // Touch swipe
+  let touchStartX = 0, touchStartY = 0;
+  sliderEl.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    clearInterval(autoSlide);
+  }, { passive: true });
+
+  sliderEl.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+      goSlide(dx > 0 ? currentSlide - 1 : currentSlide + 1);
+    }
+    autoSlide = setInterval(() => goSlide(currentSlide + 1), 3500);
+  }, { passive: true });
+
+  // Mouse drag
+  let mouseDown = false, mouseStartX = 0;
+  sliderEl.addEventListener('mousedown', e => {
+    mouseDown = true;
+    mouseStartX = e.clientX;
+    clearInterval(autoSlide);
+    sliderEl.style.cursor = 'grabbing';
+  });
+  window.addEventListener('mouseup', e => {
+    if (!mouseDown) return;
+    const dx = e.clientX - mouseStartX;
+    if (Math.abs(dx) > 40) goSlide(dx > 0 ? currentSlide - 1 : currentSlide + 1);
+    mouseDown = false;
+    sliderEl.style.cursor = 'grab';
+    autoSlide = setInterval(() => goSlide(currentSlide + 1), 3500);
+  });
+  sliderEl.style.cursor = 'grab';
+
+  // Package selection
+  function selectPackage(el, num) {
+    document.querySelectorAll('.package').forEach(p => p.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  // Sticky CTA
+  const stickyCta = document.getElementById('stickyCta');
+  const orderSection = document.getElementById('order');
+
+  window.addEventListener('scroll', () => {
+    const rect = orderSection.getBoundingClientRect();
+    if (rect.top > window.innerHeight) {
+      stickyCta.classList.add('visible');
+    } else {
+      stickyCta.classList.remove('visible');
+    }
+  });
+
+
+  // ===== COMMUNES DATA =====
+  const communesData = {
+    1: ["أدرار","تيمياوين","رقان","أولف","فنوغيل","زاوية كنتة","أقبلي","بودة","تيت","تسابيت","أنزقمير","بوضة","تيمقتن","كنتة","عرق"],
+    2: ["الشلف","تنس","الكاف الأحمر","العيساوية","بني حواء","بوقدير","أولاد فارس","حرشون","عين مران","الهرون","سنجاس","المرسى","زهانة","بنايرية","الصبحة"],
+    3: ["الأغواط","عين ماضي","تاجموت","بريدة","قصر الحيران","العسافية","حاسي الرمل","سبقاق","سيدي بوزيد","القصبات","عين سيدي علي","آفلو","عين الإبل","حاسي دلاعة"],
+    4: ["أم البواقي","عين البيضاء","أم البواقي","عين الديس","عين الفكرون","بريش","فكيرينة","الرحية","ثليجان","هنشير توميغني","مسكيانة","عين بابوش","وادي نيني"],
+    5: ["باتنة","مروانة","تيملاي","إشمول","عيون العصافير","آريس","بريكة","تيغانيمين","أولاد سلام","فسديس","سريانة","رأس العيون","نقاوس","حيدوس","تكوت"],
+    6: ["بجاية","عمال","تيشي","خراطة","سيدي عيش","فكنان","أقبو","أوقاس","سوق الإثنين","تيفرة","درعان","ئيغيل أهنكور","شميني","تيزي نبربر","ملالة"],
+    7: ["بسكرة","طولقة","أورلال","سيدي عقبة","ليشانة","خنقة سيدي ناجي","برانيس","أوماش","أومار","القنطرة","المخادمة","الفيض","جمورة","بوشقرون","الحاجب"],
+    8: ["بشار","تاغيت","بني عباس","كرزاز","لحمر","مرحومة","موغل","ابلا","مشرع هواري بومدين","عين الصفراء","قصاب"],
+    9: ["البليدة","أولاد يعيش","الأربعاء","شفاعمرو","بوفاريك","بوعينان","بني تامو","بني خليل","برج البحري","القليعة","سوهان","الشريعة","موزاية","مفتاح"],
+    10: ["البويرة","سور الغزلان","عين لحجر","ثنية الحد","بومعطوش","آث منصور","راس الوادي","مشدالة","برج أوخريص","أولاد رشاش","الأخضرية","تاغزوت","جبة"],
+    11: ["تمنراست","عين صالح","عين قزام","إدلس","إنكر","تزروق","هيران"],
+    12: ["تبسة","شريعة","الونزة","النقرين","قالمة","بئر العاتر","الشويمية","عين الزرقة","عين أقرين","الحويجبات","جرمة","بكاريا","تليسسة","منعة"],
+    13: ["تلمسان","وهران","بني صاف","السواحلية","الغزوات","نداما","بني سنوس","سيدي عبد الرحمن","مغنية","بنصار","سبدو","عين تالوت","باب العسة","الريمة"],
+    14: ["تيارت","فرندة","مهدية","الرحوية","تيسة مسيردة","سيدي بخدة","السوقر","جيلالي بن عمار","الملحة","قصر الشلالة","آين الهدجر","الغومري","مدروسة"],
+    15: ["تيزي وزو","درعة","عزازقة","بني يني","واضية","آيت محمود","أقبيل","ذراع الميزان","يطافن","أيت العزيز","أيت عيسى ميمون","بوجيمة","ثاقليعت","آيت بوعدو"],
+    16: ["الجزائر العاصمة","حيدرة","بئر مراد رايس","بوزريعة","الحراش","باب الوادي","القصبة","سيدي امحمد","الأبيار","الكوليج","المحمدية","الدار البيضاء","رويبة","بئر خادم","دالي إبراهيم","بن عكنون"],
+    17: ["الجلفة","عين وسارة","مسعد","حاسي بحبح","سيدي لعجال","برج الأمير عبد القادر","عين إبل","بنهار","خميس الخشنة","دار الشيوخ","أم العظائم","سلمانة","تعضميت"],
+    18: ["جيجل","الميلية","تاكسنة","القنار","زيامة منصورية","سيدي معروف","أولاد ربيع","الشقفة","الطاهير","الأمير عبد القادر","غبالة","بودريعة","إيراقن"],
+    19: ["سطيف","العلمة","برج ورياق","عين أزال","قجال","بئر العرش","أولاد صابر","مجانة","حمام السخنة","بوطالب","بئر ولد خليفة","أولاد تبان","بني عزيز","عين ولمان"],
+    20: ["سعيدة","عين الحجر","يوب","مولاي لحسن","سيدي بوبكر","سيدي أحمد","أولاد خالد","تيرية","دوي ثابت","القنيطرة","هونات"],
+    21: ["سكيكدة","الحروش","رمضان جمال","عزابة","زيغود يوسف","القل","تاملوكة","حمادي كرومة","أولاد حبابة","أم الطوب","كركرة","بني زيد","بئر حدادة"],
+    22: ["سيدي بلعباس","مرحوم","تلاغ","سيدي علي بوسيدي","تنيرة","تاسالة","حاسي زهانة","رأس الماء","سيدي إبراهيم","بلعباس","عين ثريد","أولاد خالد"],
+    23: ["عنابة","سرايدي","البلاونة","بن عجيلة","وادي العنب","الحجار","العلمة","شطايبي","عيون البيضة"],
+    24: ["قالمة","نقاوس","بوشقوف","لخزارة","خزارة","حمام دباغ","هيليوبوليس","بوحاشمة","سلاوة","عين مخلوف","سدراتة","رأس الكوش"],
+    25: ["قسنطينة","الخروب","ديدوش مراد","عين عبيد","إبن زياد","حامة بوزيان","بني حميدان","زيغود يوسف","عين سمارة","مسعود بوجريو"],
+    26: ["المدية","بغلة","كافي","تابلاط","عزيز","بوسادة","سيدي نعمان","الومريات","شلالة العذاورة","درعة","بن شكاو","العيساوية","البرواقية"],
+    27: ["مستغانم","عين تادلس","صيادة","مزغران","خضرة","السيرات","مسرغين","فرناقة","أولاد ماعلة","سيدي علي","بوقيراط"],
+    28: ["المسيلة","بوسعادة","سيدي عيسى","عين الميلة","خبانة","بنهار","مسيف","مقرة","سيدي هجرس","أولاد مادي","مطارفة","سيدي عمار"],
+    29: ["معسكر","تيغنيف","سيق","قايد","أولاد مامي","بوهني","حاشم","غريس","نسمط","أولاد بوحمد","سيدي قادة","الغمري","حكيما"],
+    30: ["ورقلة","تقرت","الحاجرة","بسكرة","النزلة","سيدي خويلد","تماسين","العالية","الرويسات","النقوسة","عين البيضاء","النزلة"],
+    31: ["وهران","مرسى الكبير","عين الترك","بطيوة","بئر الجير","سيدي الشحمي","الأندلس","وادي تليلات","سيدي بنور","طفراوي","بوسفر","سيدي سعيد","الكرمة"],
+    32: ["البيض","بوقطب","ستيتن","الشلالة","تهمية","روقن","الواتة","أبو النار","الرقيبة","قصاب"],
+    33: ["إليزي","برج عمر إدريس","دبداب","إن أميناس","إن غر"],
+    34: ["برج بوعريريج","رأس العيون","عين تاغروت","الحمامة","المنصورة","عين التسالة","حمالة","تكيراب","تيفور","بردو","هاشمية","ثنية العابد"],
+    35: ["بومرداس","بودواو","خميس الخشنة","تيجلابين","عمروس","بوغزول","ثنية الكرمة","الناصرية","حمادي","براقي","أفير","قدارة","لقاطة"],
+    36: ["الطارف","القل","الشط","أم الطوب","سوق أهراس","الحدائق","شباط","بن المهيدي","زريزر","الونزة","درآن"],
+    37: ["تندوف","أم العسل"],
+    38: ["تيسمسيلت","خميستي","بوعيش","لرجام","سيدي عبد الرحمن","الأزهرية","برج اليامي","ثنية الأحد","بني شعيب","سيدي سليمان","الملاح","سرغين"],
+    39: ["الوادي","قمار","تاغزوت","كوينين","دبيلة","سيدي عون","المقرن","الرباح","الطريفاوي","الدبيلة","حاسي خليفة","ميه وانسة","بن قشة"],
+    40: ["خنشلة","بابار","شلية","قايس","خيران","كاف الدار","بوحمامة","لوطاية","تاوزيانت","متوسة"],
+    41: ["سوق أهراس","صدرات","مداوروش","أم العدول","الحنانشة","الخضارة","تاورة","بئر العاتر","الزعرورية","المشروحة"],
+    42: ["تيبازة","الشعيبة","عين طاقة","بوقرقة","الأقطع","لاموريسيار","برج البحري","حجوط","بوهارون","سيدي سميان","العمارية","الغربة"],
+    43: ["ميلة","شلغوم العيد","سيدي مروان","بن يحيى عبد الرحمن","الرواشد","القصبة","تيبرقنت","الطاية","وادي العثمانية","تاجنانت","سيدي خليفة","حمالة"],
+    44: ["عين الدفلى","خميس مليانة","الحسينية","جندل","بني سلامة","تاشتة","الأبيض سيدي الشيخ","رحوية","العطاف","ذراع السمار","مليانة","بوعينان"],
+    45: ["النعامة","مشرية","صفيصيفة","آسلا","جنين بورزق","تيوت","عين بن خليل","قصدير"],
+    46: ["عين تموشنت","حمام بوحجر","سيدي بن عدة","بني صاف","شعبة اللحم","العامرية","ولهاصة الغرابة","تارقة","مسكرة","سيدي صافي"],
+    47: ["غرداية","متليلي","بريان","القرارة","بنورة","زلفانة","شأنبة","المنيعة","غرداية"],
+    48: ["غليزان","الرميلة","وادي تسالة","يلل","سيدي خطاب","أولاد سيدي إبراهيم","ماسرا","جاشار","مجاجة","المامونية","ضهرة","بريرة"],
+    49: ["تيميمون","أولوز","شروين","أوقروت","أنزقمر","تالمين","قصر الهيران"],
+    50: ["برج باجي مختار","تيمياوين"],
+    51: ["أولاد جلال","دواير","سيدي خالد","الدوسن","المعاضيد","راس الميعاد","فيض البطمة"],
+    52: ["بني عباس","تيموكتن","كرزاز","واتا"],
+    53: ["عين صالح","فوقرت","بلدة عمر","طيبة"],
+    54: ["عين قزام","تين زواتين"],
+    55: ["توقرت","المقارين","بن ناصر","المغير","الحمراية"],
+    56: ["جانت","إيليزي","الفوقرة"],
+    57: ["المغير","جامعة","سطيل","سيدي خليل","تندلة"],
+    58: ["المنيعة","حاسي الفحل","القصبات"]
+  };
+
+  function updateCommunes() {
+    const wilayaVal = document.getElementById('wilayaSelect').value;
+    const communeGroup = document.getElementById('communeGroup');
+    const communeSelect = document.getElementById('communeSelect');
+    
+    communeSelect.innerHTML = '<option value="">اختاري بلديتك</option>';
+    
+    if (wilayaVal && communesData[wilayaVal]) {
+      communesData[wilayaVal].forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        communeSelect.appendChild(opt);
+      });
+      communeGroup.style.display = 'block';
+      communeGroup.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } else {
+      communeGroup.style.display = 'none';
+    }
+  }
+
+  // Submit
+  function submitOrder() {
+    const name = document.querySelector('input[placeholder="اكتبي اسمك هنا"]').value;
+    const phone = document.querySelector('input[placeholder="0551 23 45 67"]').value;
+    const wilaya = document.getElementById('wilayaSelect').value;
+    const commune = document.getElementById('communeSelect').value;
+
+    const address = document.getElementById('addressField').value;
+    if (!phone || !name || !wilaya || !commune || !address) {
+      alert('⚠️ عمري جميع الخانات الإجبارية (الهاتف، الاسم، الولاية، البلدية، العنوان) باش نكملو طلبيتك!');
+      return;
+    }
+
+    alert('✅ شكراً! تم تسجيل طلبيتك بنجاح. سنتصل بك في أقرب وقت.');
+  }
+</script>
+</body>
+</html>
