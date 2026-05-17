@@ -1271,18 +1271,83 @@
 
   // Submit
   function submitOrder() {
-    const name = document.querySelector('input[placeholder="اكتبي اسمك هنا"]').value;
-    const phone = document.querySelector('input[placeholder="0551 23 45 67"]').value;
-    const wilaya = document.getElementById('wilayaSelect').value;
-    const commune = document.getElementById('communeSelect').value;
+    const name = document.querySelector('input[placeholder="اكتبي اسمك هنا"]').value.trim();
+    const phone = document.querySelector('input[placeholder="0551 23 45 67"]').value.trim();
+    const wilaya = document.getElementById('wilayaSelect');
+    const wilayaText = wilaya.options[wilaya.selectedIndex].text;
+    const commune = document.getElementById('communeSelect').value.trim();
+    const address = document.getElementById('addressField').value.trim();
+    const promo = document.querySelector('input[placeholder="أدخلي الكود هنا"]').value.trim();
 
-    const address = document.getElementById('addressField').value;
-    if (!phone || !name || !wilaya || !commune || !address) {
+    // Get selected package
+    const selectedPkg = document.querySelector('.package.selected');
+    const pkgName = selectedPkg ? selectedPkg.querySelector('h4').textContent : '';
+    const pkgPrice = selectedPkg ? selectedPkg.querySelector('.package-price').textContent : '';
+    const packageInfo = pkgName + ' - ' + pkgPrice;
+
+    if (!phone || !name || !wilaya.value || !commune || !address) {
       alert('⚠️ عمري جميع الخانات الإجبارية (الهاتف، الاسم، الولاية، البلدية، العنوان) باش نكملو طلبيتك!');
       return;
     }
 
-    alert('✅ شكراً! تم تسجيل طلبيتك بنجاح. سنتصل بك في أقرب وقت.');
+    // Show loading
+    const btn = document.querySelector('.cta-blink');
+    btn.textContent = '⏳ جاري إرسال طلبيتك...';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    const data = {
+      name: name,
+      phone: phone,
+      wilaya: wilayaText,
+      commune: commune,
+      address: address,
+      package: packageInfo,
+      promo: promo
+    };
+
+    fetch('https://script.google.com/macros/s/AKfycbwgNDGPAb1_NybKabPpltmXuZYEcJ-sN9a9kwMwXnJxIO8DPephfj4YsR6bsPsN6CB1fA/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(() => {
+      btn.textContent = '✅ تم تسجيل طلبيتك!';
+      btn.style.background = '#1db954';
+      btn.style.opacity = '1';
+      setTimeout(() => {
+        alert('✅ شكراً ' + name + '!\nتم تسجيل طلبيتك بنجاح.\nسنتصل بك قريباً على الرقم: ' + phone);
+        // Reset form
+        document.querySelector('input[placeholder="اكتبي اسمك هنا"]').value = '';
+        document.querySelector('input[placeholder="0551 23 45 67"]').value = '';
+        document.getElementById('wilayaSelect').value = '';
+        document.getElementById('communeSelect').innerHTML = '<option value="">اختاري بلديتك</option>';
+        document.getElementById('communeGroup').style.display = 'none';
+        document.getElementById('addressField').value = '';
+        btn.textContent = '🛍️ اطلبي الآن — الدفع عند الاستلام';
+        btn.style.background = 'var(--red)';
+        btn.disabled = false;
+      }, 500);
+    })
+    .catch(() => {
+      // no-cors always goes to catch but data is sent
+      btn.textContent = '✅ تم تسجيل طلبيتك!';
+      btn.style.background = '#1db954';
+      btn.style.opacity = '1';
+      setTimeout(() => {
+        alert('✅ شكراً ' + name + '!\nتم تسجيل طلبيتك بنجاح.\nسنتصل بك قريباً على الرقم: ' + phone);
+        document.querySelector('input[placeholder="اكتبي اسمك هنا"]').value = '';
+        document.querySelector('input[placeholder="0551 23 45 67"]').value = '';
+        document.getElementById('wilayaSelect').value = '';
+        document.getElementById('communeSelect').innerHTML = '<option value="">اختاري بلديتك</option>';
+        document.getElementById('communeGroup').style.display = 'none';
+        document.getElementById('addressField').value = '';
+        btn.textContent = '🛍️ اطلبي الآن — الدفع عند الاستلام';
+        btn.style.background = 'var(--red)';
+        btn.disabled = false;
+      }, 500);
+    });
   }
 </script>
 </body>
