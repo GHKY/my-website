@@ -757,6 +757,18 @@
     animation: badgeShine 2s linear infinite !important;
     transform-origin: center;
   }
+
+  /* ===== STATIC GIFT BAR ===== */
+  .gift-bar {
+    background: #1a1a2e;
+    color: #fff;
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    border-bottom: 2px solid var(--red);
+    line-height: 1.5;
+  }
 </style>
 </head>
 <body>
@@ -764,7 +776,9 @@
 <!-- ANNOUNCEMENT BAR -->
 <div class="announcement">
   🚚 توصيل مجاني إلى كل الولايات | الدفع عند الاستلام 🤝
-  <span>😶 سبيسيال مخبية داخل الكولي تاعك! استلمي طلبيتك واكتشفي هديتك</span>
+</div>
+<div class="gift-bar">
+  🎁 هدية سبيسيال مخبية داخل الكولي تاعك! استلمي طلبيتك واكتشفي هديتك 🔥
 </div>
 
 <!-- HERO SLIDER -->
@@ -961,7 +975,7 @@
     <label class="form-label">رقم الهاتف *</label>
     <div class="phone-row">
       <input type="tel" class="form-input" placeholder="0551 23 45 67" style="flex:1;">
-      <div class="flag-select">🇩🇿 ▼</div>
+      <div class="flag-select">🇩🇿</div>
     </div>
   </div>
 
@@ -1272,4 +1286,5 @@
   }
 </script>
 </body>
+<!-- v1779006681 -->
 </html>
